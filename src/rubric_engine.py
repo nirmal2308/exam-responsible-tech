@@ -104,6 +104,23 @@ def score_v1(answer, question):
             "flags": [], "priority": "NORMAL"}
 
 
+def score_v2(answer, question, unmatched_threshold=2):
+    credited, evidence, negated_pts, unmatched = _match_points(answer, question, negation_guard=True)
+    mark = len(credited)
+    flags = []
+    if negated_pts:
+        flags.append("NEGATION")
+    if unmatched >= unmatched_threshold:
+        flags.append("UNMATCHED_CONTENT")
+    if mark in (PASS_MARK - 1, PASS_MARK):
+        flags.append("BOUNDARY")
+    high = ("NEGATION" in flags) or ("UNMATCHED_CONTENT" in flags)
+    priority = "HIGH" if high else ("MEDIUM" if "BOUNDARY" in flags else "LOW")
+    return {"engine": "v2", "mark": mark, "credited": credited, "evidence": evidence,
+            "flags": flags, "priority": priority, "negated_points": negated_pts,
+            "unmatched_sentences": unmatched}
+
+
 def grade_band(mark, max_mark=MAX_MARK):
     pct = 100.0 * mark / max_mark
     if pct >= 90: return "O"
@@ -118,5 +135,5 @@ if __name__ == "__main__":
     q = QUESTIONS["Q1"]
     txt = ("Mutual exclusion is not needed for deadlock to occur. Hold and wait means a process holds "
            "at least one resource while requesting additional resources.")
-    for f in (score_v0, score_v1):
+    for f in (score_v0, score_v1, score_v2):
         print(f.__name__, f(txt, q))
