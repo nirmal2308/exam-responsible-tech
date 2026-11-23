@@ -121,6 +121,89 @@ def score_v2(answer, question, unmatched_threshold=2):
             "unmatched_sentences": unmatched}
 
 
+# ------------------------------------------------------------------ v3 (clause-aware revision of v2)
+BOUNDARY_WORDS = {"and", "but", "so", "because", "while", "which", ","}
+
+
+def _tok_comma(sentence):
+    return re.findall(r"[a-z0-9]+|,", sentence.lower().replace("'", ""))
+
+
+def _neg_clause(raw, span):
+    """Negation cue within 5 words before / 4 words after the phrase, never crossing a clause boundary."""
+    start, end = span
+    n = 0
+    for t in reversed(raw[:start]):
+        if t in BOUNDARY_WORDS:
+            break
+        n += 1
+        if t in NEGATION_CUES:
+            return True
+        if n >= WINDOW_BEFORE:
+            break
+    n = 0
+    for t in raw[end:]:
+        if t in BOUNDARY_WORDS:
+            break
+        n += 1
+        if t in NEGATION_CUES:
+            return True
+        if n >= WINDOW_AFTER:
+            break
+    return False
+
+
+def score_v3(answer, question, unmatched_threshold=2):
+    sentences = split_sentences(answer)
+    raws = [_tok_comma(s) for s in sentences]
+    sts = [[t if t == "," else stem(t) for t in r] for r in raws]
+    covered = [[False] * len(r) for r in raws]
+    credited, evidence, negated_pts = [], {}, []
+    for pt in question["points"]:
+        ok_phrase = neg_phrase = None
+        for ph in pt["keywords"] + pt["synonyms"]:
+            pst = stems(ph)
+            for si, ss in enumerate(sts):
+                for span in find_spans(ss, pst):
+                    for k in range(*span):
+                        covered[si][k] = True
+                    if _neg_clause(raws[si], span):
+                        neg_phrase = neg_phrase or ph
+                    else:
+                        ok_phrase = ok_phrase or ph
+        if ok_phrase:
+            credited.append(pt["id"]); evidence[pt["id"]] = ok_phrase
+        elif neg_phrase:
+            negated_pts.append(pt["id"]); evidence[pt["id"]] = f"NEGATED: {neg_phrase}"
+    # clause segmentation: a clause ends at a sentence end or at an uncovered 'and'; a clause that
+    # contains any rubric match is "covered"; an uncovered clause with >= 6 words is unmatched content
+    runs = 0
+    for raw, cov in zip(raws, covered):
+        words, hit = 0, False
+        for t, c in zip(raw, cov):
+            if t == ",":
+                continue
+            if t == "and" and not c:
+                runs += (words >= SUBSTANTIVE_MIN_TOKENS and not hit)
+                words, hit = 0, False
+            else:
+                words += 1
+                hit = hit or c
+        runs += (words >= SUBSTANTIVE_MIN_TOKENS and not hit)
+    mark = len(credited)
+    flags = []
+    if negated_pts:
+        flags.append("NEGATION")
+    if runs >= unmatched_threshold:
+        flags.append("UNMATCHED_CONTENT")
+    if mark in (PASS_MARK - 1, PASS_MARK):
+        flags.append("BOUNDARY")
+    high = ("NEGATION" in flags) or ("UNMATCHED_CONTENT" in flags)
+    priority = "HIGH" if high else ("MEDIUM" if "BOUNDARY" in flags else "LOW")
+    return {"engine": "v3", "mark": mark, "credited": credited, "evidence": evidence, "flags": flags,
+            "priority": priority, "negated_points": negated_pts, "unmatched_sentences": runs}
+
+
 def grade_band(mark, max_mark=MAX_MARK):
     pct = 100.0 * mark / max_mark
     if pct >= 90: return "O"
