@@ -707,12 +707,12 @@
   }
  },
  "measured": {
-  "rule_ms_per_answer": 0.1960191666667773,
-  "audit_append_ms_per_entry": 0.018145166666727164,
-  "verify_seconds_per_entry": 6.153883333354316e-06,
-  "verify_seconds_total": 0.03692330000012589,
+  "rule_ms_per_answer": 0.28090162499969057,
+  "audit_append_ms_per_entry": 0.029059516666469186,
+  "verify_seconds_per_entry": 9.13945000017217e-06,
+  "verify_seconds_total": 0.05483670000103302,
   "verify_entries": 6000,
-  "bytes_per_audit_entry": 305.1855
+  "bytes_per_audit_entry": 305.17566666666664
  },
  "selection": {
   "criteria": [
@@ -1395,8 +1395,8 @@
    "scripts_year": 50000,
    "answers_year": 250000,
    "audit_events_year": 1500000,
-   "audit_gb_year": 0.45777825,
-   "chain_verify_minutes_year_est": 0.15384708333385788
+   "audit_gb_year": 0.45776349999999993,
+   "chain_verify_minutes_year_est": 0.22848625000430425
   }
  },
  "prediction_check": {
