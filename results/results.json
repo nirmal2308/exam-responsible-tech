@@ -1,0 +1,1414 @@
+{
+ "predictions": {
+  "C1": "Initial rules (v1) credit >=85% of paraphrased points (baseline v0 <=5%) but <=20% of unfamiliar-term points; v1 falsely credits >=90% of negated points.",
+  "C2": "Revised rules (v2): negation guard cuts false credit on negated points to <=20%, and HIGH moderation priority captures >=90% of scripts whose suggestion is >=2 marks away from the expert mark while flagging <=60% of scripts.",
+  "C3": "Plain audit table detects 0 of 4 tamper types; hash chain with external anchor detects 4 of 4; chain without anchor misses tail truncation; no log scheme can detect a wrong-but-legitimate mark.",
+  "C4": "Authorization matrix: 77 of 77 role-action checks match the written specification.",
+  "C5": "During a verification-service outage all 20 local marks stay published and all 20 messages are eventually delivered exactly once per idempotency key."
+ },
+ "dataset": {
+  "n": 240,
+  "seed": 20261123,
+  "per_question": 80,
+  "variant_probabilities": {
+   "exact": 0.3,
+   "paraphrase": 0.2,
+   "unfamiliar": 0.15,
+   "negated": 0.1,
+   "absent": 0.25
+  },
+  "run_on_share_target": 0.3,
+  "run_on_share_actual": 0.29583333333333334,
+  "variant_counts": {
+   "absent": 298,
+   "negated": 122,
+   "exact": 371,
+   "paraphrase": 240,
+   "unfamiliar": 169
+  },
+  "expert_mark_distribution": {
+   "0": 0,
+   "1": 13,
+   "2": 37,
+   "3": 93,
+   "4": 71,
+   "5": 26
+  }
+ },
+ "script_level": {
+  "v0": {
+   "exact": 0.15833333333333333,
+   "within1": 0.5666666666666667,
+   "mae": 1.4625,
+   "bias": -1.1958333333333333,
+   "passfail_agree": 0.6958333333333333,
+   "silent_ge2": 0.43333333333333335
+  },
+  "v1": {
+   "exact": 0.3625,
+   "within1": 0.8416666666666667,
+   "mae": 0.8041666666666667,
+   "bias": -0.19583333333333333,
+   "passfail_agree": 0.8958333333333334,
+   "silent_ge2": 0.15833333333333333
+  },
+  "v2": {
+   "exact": 0.45416666666666666,
+   "within1": 0.8416666666666667,
+   "mae": 0.7166666666666667,
+   "bias": -0.7166666666666667,
+   "passfail_agree": 0.8583333333333333,
+   "silent_ge2": 0.15833333333333333
+  },
+  "v3": {
+   "exact": 0.45416666666666666,
+   "within1": 0.8541666666666666,
+   "mae": 0.7041666666666667,
+   "bias": -0.7041666666666667,
+   "passfail_agree": 0.8583333333333333,
+   "silent_ge2": 0.14583333333333334
+  }
+ },
+ "point_level": {
+  "v0": {
+   "absent": {
+    "credited": 0,
+    "total": 298,
+    "rate": 0.0
+   },
+   "negated": {
+    "credited": 122,
+    "total": 122,
+    "rate": 1.0
+   },
+   "exact": {
+    "credited": 371,
+    "total": 371,
+    "rate": 1.0
+   },
+   "paraphrase": {
+    "credited": 0,
+    "total": 240,
+    "rate": 0.0
+   },
+   "unfamiliar": {
+    "credited": 0,
+    "total": 169,
+    "rate": 0.0
+   }
+  },
+  "v1": {
+   "absent": {
+    "credited": 0,
+    "total": 298,
+    "rate": 0.0
+   },
+   "negated": {
+    "credited": 122,
+    "total": 122,
+    "rate": 1.0
+   },
+   "exact": {
+    "credited": 371,
+    "total": 371,
+    "rate": 1.0
+   },
+   "paraphrase": {
+    "credited": 240,
+    "total": 240,
+    "rate": 1.0
+   },
+   "unfamiliar": {
+    "credited": 0,
+    "total": 169,
+    "rate": 0.0
+   }
+  },
+  "v2": {
+   "absent": {
+    "credited": 0,
+    "total": 298,
+    "rate": 0.0
+   },
+   "negated": {
+    "credited": 0,
+    "total": 122,
+    "rate": 0.0
+   },
+   "exact": {
+    "credited": 368,
+    "total": 371,
+    "rate": 0.9919137466307277
+   },
+   "paraphrase": {
+    "credited": 240,
+    "total": 240,
+    "rate": 1.0
+   },
+   "unfamiliar": {
+    "credited": 0,
+    "total": 169,
+    "rate": 0.0
+   }
+  },
+  "v3": {
+   "absent": {
+    "credited": 0,
+    "total": 298,
+    "rate": 0.0
+   },
+   "negated": {
+    "credited": 0,
+    "total": 122,
+    "rate": 0.0
+   },
+   "exact": {
+    "credited": 371,
+    "total": 371,
+    "rate": 1.0
+   },
+   "paraphrase": {
+    "credited": 240,
+    "total": 240,
+    "rate": 1.0
+   },
+   "unfamiliar": {
+    "credited": 0,
+    "total": 169,
+    "rate": 0.0
+   }
+  }
+ },
+ "subsets": {
+  "all scripts": {
+   "n": 240,
+   "v0": {
+    "exact": 0.15833333333333333,
+    "mae": 1.4625
+   },
+   "v1": {
+    "exact": 0.3625,
+    "mae": 0.8041666666666667
+   },
+   "v2": {
+    "exact": 0.45416666666666666,
+    "mae": 0.7166666666666667
+   },
+   "v3": {
+    "exact": 0.45416666666666666,
+    "mae": 0.7041666666666667
+   }
+  },
+  "contains paraphrase": {
+   "n": 164,
+   "v0": {
+    "exact": 0.10365853658536585,
+    "mae": 1.7195121951219512
+   },
+   "v1": {
+    "exact": 0.4024390243902439,
+    "mae": 0.7560975609756098
+   },
+   "v2": {
+    "exact": 0.5060975609756098,
+    "mae": 0.6341463414634146
+   },
+   "v3": {
+    "exact": 0.5060975609756098,
+    "mae": 0.6219512195121951
+   }
+  },
+  "contains unfamiliar term": {
+   "n": 131,
+   "v0": {
+    "exact": 0.10687022900763359,
+    "mae": 1.7251908396946565
+   },
+   "v1": {
+    "exact": 0.24427480916030533,
+    "mae": 0.9694656488549618
+   },
+   "v2": {
+    "exact": 0.0,
+    "mae": 1.3129770992366412
+   },
+   "v3": {
+    "exact": 0.0,
+    "mae": 1.2900763358778626
+   }
+  },
+  "contains negated statement": {
+   "n": 103,
+   "v0": {
+    "exact": 0.27184466019417475,
+    "mae": 0.912621359223301
+   },
+   "v1": {
+    "exact": 0.3106796116504854,
+    "mae": 0.8252427184466019
+   },
+   "v2": {
+    "exact": 0.5242718446601942,
+    "mae": 0.6116504854368932
+   },
+   "v3": {
+    "exact": 0.5242718446601942,
+    "mae": 0.5922330097087378
+   }
+  },
+  "run-on style answer": {
+   "n": 71,
+   "v0": {
+    "exact": 0.15492957746478872,
+    "mae": 1.4507042253521127
+   },
+   "v1": {
+    "exact": 0.36619718309859156,
+    "mae": 0.8309859154929577
+   },
+   "v2": {
+    "exact": 0.4788732394366197,
+    "mae": 0.7183098591549296
+   },
+   "v3": {
+    "exact": 0.4788732394366197,
+    "mae": 0.676056338028169
+   }
+  },
+  "clean (exact/absent only)": {
+   "n": 10,
+   "v0": {
+    "exact": 1.0,
+    "mae": 0.0
+   },
+   "v1": {
+    "exact": 1.0,
+    "mae": 0.0
+   },
+   "v2": {
+    "exact": 1.0,
+    "mae": 0.0
+   },
+   "v3": {
+    "exact": 1.0,
+    "mae": 0.0
+   }
+  }
+ },
+ "stakes_matrix": {
+  "v1": {
+   "exact": {
+    "n": 87,
+    "high": 0,
+    "any_flag": 0
+   },
+   "under-marked, same outcome": {
+    "n": 76,
+    "high": 0,
+    "any_flag": 0
+   },
+   "under-marked, pass/fail flips": {
+    "n": 17,
+    "high": 0,
+    "any_flag": 0
+   },
+   "over-marked, same outcome": {
+    "n": 52,
+    "high": 0,
+    "any_flag": 0
+   },
+   "over-marked, pass/fail flips": {
+    "n": 8,
+    "high": 0,
+    "any_flag": 0
+   }
+  },
+  "v2": {
+   "exact": {
+    "n": 109,
+    "high": 57,
+    "any_flag": 64
+   },
+   "under-marked, same outcome": {
+    "n": 97,
+    "high": 54,
+    "any_flag": 68
+   },
+   "under-marked, pass/fail flips": {
+    "n": 34,
+    "high": 30,
+    "any_flag": 34
+   },
+   "over-marked, same outcome": {
+    "n": 0,
+    "high": 0,
+    "any_flag": 0
+   },
+   "over-marked, pass/fail flips": {
+    "n": 0,
+    "high": 0,
+    "any_flag": 0
+   }
+  },
+  "v3": {
+   "exact": {
+    "n": 109,
+    "high": 58,
+    "any_flag": 65
+   },
+   "under-marked, same outcome": {
+    "n": 97,
+    "high": 68,
+    "any_flag": 76
+   },
+   "under-marked, pass/fail flips": {
+    "n": 34,
+    "high": 32,
+    "any_flag": 34
+   },
+   "over-marked, same outcome": {
+    "n": 0,
+    "high": 0,
+    "any_flag": 0
+   },
+   "over-marked, pass/fail flips": {
+    "n": 0,
+    "high": 0,
+    "any_flag": 0
+   }
+  }
+ },
+ "moderation_by_engine": {
+  "v2": {
+   "n_ge2": 38,
+   "n_ge1": 131,
+   "n_flip": 34,
+   "recall_high_ge2": 0.7631578947368421,
+   "recall_high_ge1": 0.6412213740458015,
+   "recall_high_flip": 0.8823529411764706,
+   "recall_any_ge2": 0.868421052631579,
+   "recall_any_ge1": 0.7786259541984732,
+   "recall_any_flip": 1.0,
+   "share_high": 0.5875,
+   "share_high_or_medium": 0.6916666666666667,
+   "negation_flag_without_negated_content": 1,
+   "flag_counts": {
+    "NEGATION": 104,
+    "UNMATCHED_CONTENT": 55,
+    "BOUNDARY": 102
+   }
+  },
+  "v3": {
+   "n_ge2": 35,
+   "n_ge1": 131,
+   "n_flip": 34,
+   "recall_high_ge2": 1.0,
+   "recall_high_ge1": 0.7633587786259542,
+   "recall_high_flip": 0.9411764705882353,
+   "recall_any_ge2": 1.0,
+   "recall_any_ge1": 0.8396946564885496,
+   "recall_any_flip": 1.0,
+   "share_high": 0.6583333333333333,
+   "share_high_or_medium": 0.7291666666666666,
+   "negation_flag_without_negated_content": 0,
+   "flag_counts": {
+    "NEGATION": 103,
+    "UNMATCHED_CONTENT": 88,
+    "BOUNDARY": 101
+   }
+  }
+ },
+ "moderation": {
+  "n_ge2": 35,
+  "n_ge1": 131,
+  "n_flip": 34,
+  "recall_high_ge2": 1.0,
+  "recall_high_ge1": 0.7633587786259542,
+  "recall_high_flip": 0.9411764705882353,
+  "recall_any_ge2": 1.0,
+  "recall_any_ge1": 0.8396946564885496,
+  "recall_any_flip": 1.0,
+  "share_high": 0.6583333333333333,
+  "share_high_or_medium": 0.7291666666666666,
+  "flag_counts": {
+   "NEGATION": 103,
+   "UNMATCHED_CONTENT": 88,
+   "BOUNDARY": 101
+  },
+  "priority_counts": {
+   "HIGH": 158,
+   "MEDIUM": 17,
+   "LOW": 65
+  },
+  "negation_flag_without_negated_content": 0
+ },
+ "threshold_sweep": [
+  {
+   "threshold": 1,
+   "share_high": 0.8625,
+   "recall_ge2": 1.0,
+   "recall_ge1": 1.0
+  },
+  {
+   "threshold": 2,
+   "share_high": 0.6583333333333333,
+   "recall_ge2": 1.0,
+   "recall_ge1": 0.7633587786259542
+  },
+  {
+   "threshold": 3,
+   "share_high": 0.49166666666666664,
+   "recall_ge2": 0.6,
+   "recall_ge1": 0.48091603053435117
+  },
+  {
+   "threshold": 4,
+   "share_high": 0.44166666666666665,
+   "recall_ge2": 0.4,
+   "recall_ge1": 0.3969465648854962
+  }
+ ],
+ "revision": {
+  "v1_negated_false_credit": 1.0,
+  "v3_negated_false_credit": 0.0,
+  "v1_over_marked_flip": 8,
+  "v3_over_marked_flip": 0
+ },
+ "categories": {
+  "Database Systems": {
+   "n": 80,
+   "hist_vs_expert_exact": 0.85,
+   "hist_vs_expert_within1": 1.0,
+   "hist_vs_expert_ge2": 0.0,
+   "hist_vs_expert_qwk": 0.9365079365079365,
+   "engine_vs_expert_exact": 0.425,
+   "engine_vs_hist_exact": 0.45,
+   "engine_vs_hist_within1": 0.85,
+   "engine_vs_expert_within1": 0.875
+  },
+  "Operating Systems": {
+   "n": 80,
+   "hist_vs_expert_exact": 0.8125,
+   "hist_vs_expert_within1": 1.0,
+   "hist_vs_expert_ge2": 0.0,
+   "hist_vs_expert_qwk": 0.9072069285493349,
+   "engine_vs_expert_exact": 0.5,
+   "engine_vs_hist_exact": 0.375,
+   "engine_vs_hist_within1": 0.875,
+   "engine_vs_expert_within1": 0.8625
+  },
+  "Software Engineering": {
+   "n": 80,
+   "hist_vs_expert_exact": 0.3625,
+   "hist_vs_expert_within1": 0.7625,
+   "hist_vs_expert_ge2": 0.2375,
+   "hist_vs_expert_qwk": 0.5241779497098644,
+   "engine_vs_expert_exact": 0.4375,
+   "engine_vs_hist_exact": 0.225,
+   "engine_vs_hist_within1": 0.65,
+   "engine_vs_expert_within1": 0.825
+  }
+ },
+ "noise_ceiling": [
+  {
+   "sd": 0.2,
+   "exact_ceiling": 0.9958333333333333,
+   "within1_ceiling": 1.0
+  },
+  {
+   "sd": 0.35,
+   "exact_ceiling": 0.8333333333333334,
+   "within1_ceiling": 1.0
+  },
+  {
+   "sd": 0.5,
+   "exact_ceiling": 0.6416666666666667,
+   "within1_ceiling": 1.0
+  },
+  {
+   "sd": 0.8,
+   "exact_ceiling": 0.45416666666666666,
+   "within1_ceiling": 0.9541666666666667
+  },
+  {
+   "sd": 1.0,
+   "exact_ceiling": 0.48333333333333334,
+   "within1_ceiling": 0.8916666666666667
+  },
+  {
+   "sd": 1.25,
+   "exact_ceiling": 0.3416666666666667,
+   "within1_ceiling": 0.825
+  },
+  {
+   "sd": 1.5,
+   "exact_ceiling": 0.2875,
+   "within1_ceiling": 0.7541666666666667
+  }
+ ],
+ "policy_suppress_inconsistent": {
+  "category": "Software Engineering",
+  "scripts_routed_to_manual": 80,
+  "share_of_all_scripts": 0.3333333333333333
+ },
+ "display_policy": {
+  "all categories": {
+   "shown": 82,
+   "share_shown": 0.3416666666666667,
+   "exact": 0.6219512195121951,
+   "within1": 1.0,
+   "ge2": 0,
+   "passfail_flips": 2,
+   "mae": 0.3780487804878049
+  },
+  "Day-4: Software Engineering suppressed": {
+   "shown": 54,
+   "share_shown": 0.225,
+   "exact": 0.6296296296296297,
+   "within1": 1.0,
+   "ge2": 0,
+   "passfail_flips": 1,
+   "mae": 0.37037037037037035
+  }
+ },
+ "high_by_category": {
+  "Database Systems": 0.6,
+  "Operating Systems": 0.725,
+  "Software Engineering": 0.65
+ },
+ "validation": [
+  {
+   "id": "V1",
+   "title": "Mark validation (range, type, 0.5 steps)",
+   "passed": true,
+   "detail": "6/6 invalid inputs rejected; valid 3.5 accepted"
+  },
+  {
+   "id": "V2",
+   "title": "Status workflow cannot be skipped",
+   "passed": true,
+   "detail": "publish rejected from DRAFT, EVALUATED and MODERATED; allowed only after APPROVED"
+  },
+  {
+   "id": "V3",
+   "title": "Grade-band mapping (0-5 of 5)",
+   "passed": true,
+   "detail": "{0: 'F', 1: 'F', 2: 'C', 3: 'B', 4: 'A', 5: 'O'}"
+  },
+  {
+   "id": "V4",
+   "title": "Authorization matrix (role x action)",
+   "passed": true,
+   "detail": "77 checks, 0 mismatches against the written specification"
+  },
+  {
+   "id": "V5",
+   "title": "Separation of duties and ownership",
+   "passed": true,
+   "detail": "administrator cannot moderate/approve; examiner cannot moderate own work; moderator cannot approve; student cannot challenge another student's record"
+  },
+  {
+   "id": "V6",
+   "title": "Override needs a reason and is audited",
+   "passed": true,
+   "detail": "override without reason rejected; with reason stored with the suggestion in the audit trail"
+  },
+  {
+   "id": "V7",
+   "title": "Persistence across restart",
+   "passed": true,
+   "detail": "record and 5 audit entries identical after reopen; chain verifies"
+  },
+  {
+   "id": "V8",
+   "title": "Audit completeness incl. denied attempts",
+   "passed": true,
+   "detail": "6 audit entries; 4 record versions retained; chain intact"
+  },
+  {
+   "id": "V9",
+   "title": "Audit tampering: plain table vs append-only table vs hash chain",
+   "passed": true,
+   "detail": "hash chain + external anchor detects all four tamper types; plain table detects none; triggers block ordinary SQL but not a privileged DBA; chain alone misses tail truncation"
+  },
+  {
+   "id": "V10",
+   "title": "Chain cannot verify input truthfulness",
+   "passed": true,
+   "detail": "a wrong mark entered through the normal API leaves the chain valid: integrity of the record is not truth of the mark"
+  },
+  {
+   "id": "V11",
+   "title": "Redaction of sensitive payload keeps audit chain valid",
+   "passed": true,
+   "detail": "administrator cannot redact; reason mandatory; payload and salt erased; chain still verifies; redaction itself is audited"
+  },
+  {
+   "id": "V12",
+   "title": "Revaluation: independent re-evaluation, versioned correction",
+   "passed": true,
+   "detail": "8 versions kept; original published mark 2 retained; corrected mark 3 published after independent moderator and different approver"
+  },
+  {
+   "id": "V13",
+   "title": "Verification service outage: local records preserved, safe retry",
+   "passed": true,
+   "detail": "20 marks stay PUBLISHED locally during outage; outbox status {'SENT': 20}; 2 retry rounds; duplicates absorbed by idempotency keys (receiver processed 22 calls for 20 unique keys)"
+  },
+  {
+   "id": "V14",
+   "title": "Signed credential: offline verify, tamper, revoke and re-issue",
+   "passed": true,
+   "detail": "original verifies; altered band -> 'signature invalid or record altered'; revoked -> 'credential revoked (corrected or withdrawn)'; forged revocation list -> 'revocation list signature invalid'; corrected credential C-002 verifies"
+  }
+ ],
+ "tamper_matrix": {
+  "T1 edit a logged mark": {
+   "plain": "UNDETECTED",
+   "trig": "PREVENTED (ordinary SQL) / UNDETECTED after privileged bypass",
+   "chain": "DETECTED",
+   "chain+anchor": "DETECTED"
+  },
+  "T2 delete a middle log row": {
+   "plain": "UNDETECTED",
+   "trig": "PREVENTED (ordinary SQL) / UNDETECTED after privileged bypass",
+   "chain": "DETECTED",
+   "chain+anchor": "DETECTED"
+  },
+  "T3 swap two log rows": {
+   "plain": "UNDETECTED",
+   "trig": "PREVENTED (ordinary SQL) / UNDETECTED after privileged bypass",
+   "chain": "DETECTED",
+   "chain+anchor": "DETECTED"
+  },
+  "T4 truncate the last 8 log rows": {
+   "plain": "UNDETECTED",
+   "trig": "PREVENTED (ordinary SQL) / UNDETECTED after privileged bypass",
+   "chain": "UNDETECTED",
+   "chain+anchor": "DETECTED"
+  }
+ },
+ "tamper_bypass": {
+  "T1": {
+   "blocked_ordinary": true,
+   "bypass_succeeded": true
+  },
+  "T2": {
+   "blocked_ordinary": true,
+   "bypass_succeeded": true
+  },
+  "T3": {
+   "blocked_ordinary": true,
+   "bypass_succeeded": true
+  },
+  "T4": {
+   "blocked_ordinary": true,
+   "bypass_succeeded": true
+  }
+ },
+ "measured": {
+  "rule_ms_per_answer": 0.1960191666667773,
+  "audit_append_ms_per_entry": 0.018145166666727164,
+  "verify_seconds_per_entry": 6.153883333354316e-06,
+  "verify_seconds_total": 0.03692330000012589,
+  "verify_entries": 6000,
+  "bytes_per_audit_entry": 305.1855
+ },
+ "selection": {
+  "criteria": [
+   "Usefulness",
+   "Reliability",
+   "Privacy",
+   "Fairness & explainability",
+   "Cost (5-year)",
+   "Sustainability",
+   "Correctability & accountability"
+  ],
+  "alts": {
+   "A": "Conventional + deterministic rules",
+   "B": "AI/ML scoring assistance",
+   "C": "Blockchain credential verification",
+   "D": "Combined AI/ML + Blockchain"
+  },
+  "w0": [
+   15,
+   20,
+   15,
+   15,
+   15,
+   10,
+   10
+  ],
+  "s0": {
+   "A": [
+    3,
+    4,
+    5,
+    4,
+    5,
+    5,
+    4
+   ],
+   "B": [
+    4,
+    3,
+    3,
+    2,
+    3,
+    3,
+    3
+   ],
+   "C": [
+    2,
+    3,
+    2,
+    3,
+    2,
+    2,
+    2
+   ],
+   "D": [
+    4,
+    3,
+    2,
+    2,
+    1,
+    1,
+    2
+   ]
+  },
+  "w1": [
+   10,
+   20,
+   15,
+   10,
+   20,
+   5,
+   20
+  ],
+  "s1": {
+   "A": [
+    3,
+    4,
+    5,
+    4,
+    5,
+    5,
+    5
+   ],
+   "B": [
+    4,
+    2,
+    3,
+    2,
+    2,
+    2,
+    2
+   ],
+   "C": [
+    1,
+    2,
+    2,
+    3,
+    1,
+    2,
+    1
+   ],
+   "D": [
+    3,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1
+   ]
+  },
+  "totals0": {
+   "A": 4.25,
+   "B": 2.9999999999999996,
+   "C": 2.35,
+   "D": 2.25
+  },
+  "totals1": {
+   "A": 4.5,
+   "B": 2.35,
+   "C": 1.6,
+   "D": 1.65
+  },
+  "contrib0": {
+   "A": [
+    0.44999999999999996,
+    0.8,
+    0.75,
+    0.6,
+    0.75,
+    0.5,
+    0.4
+   ],
+   "B": [
+    0.6,
+    0.6000000000000001,
+    0.44999999999999996,
+    0.3,
+    0.44999999999999996,
+    0.30000000000000004,
+    0.30000000000000004
+   ],
+   "C": [
+    0.3,
+    0.6000000000000001,
+    0.3,
+    0.44999999999999996,
+    0.3,
+    0.2,
+    0.2
+   ],
+   "D": [
+    0.6,
+    0.6000000000000001,
+    0.3,
+    0.3,
+    0.15,
+    0.1,
+    0.2
+   ]
+  },
+  "contrib1": {
+   "A": [
+    0.30000000000000004,
+    0.8,
+    0.75,
+    0.4,
+    1.0,
+    0.25,
+    1.0
+   ],
+   "B": [
+    0.4,
+    0.4,
+    0.44999999999999996,
+    0.2,
+    0.4,
+    0.1,
+    0.4
+   ],
+   "C": [
+    0.1,
+    0.4,
+    0.3,
+    0.30000000000000004,
+    0.2,
+    0.1,
+    0.2
+   ],
+   "D": [
+    0.30000000000000004,
+    0.4,
+    0.3,
+    0.2,
+    0.2,
+    0.05,
+    0.2
+   ]
+  },
+  "sweep_usefulness": [
+   [
+    0,
+    {
+     "A": 4.470588235294118,
+     "B": 2.823529411764706,
+     "C": 2.4117647058823533,
+     "D": 1.9411764705882355
+    }
+   ],
+   [
+    5,
+    {
+     "A": 4.397058823529411,
+     "B": 2.882352941176471,
+     "C": 2.3911764705882357,
+     "D": 2.044117647058824
+    }
+   ],
+   [
+    10,
+    {
+     "A": 4.323529411764706,
+     "B": 2.9411764705882355,
+     "C": 2.3705882352941177,
+     "D": 2.147058823529412
+    }
+   ],
+   [
+    15,
+    {
+     "A": 4.25,
+     "B": 2.9999999999999996,
+     "C": 2.35,
+     "D": 2.25
+    }
+   ],
+   [
+    20,
+    {
+     "A": 4.176470588235295,
+     "B": 3.0588235294117645,
+     "C": 2.329411764705883,
+     "D": 2.352941176470588
+    }
+   ],
+   [
+    25,
+    {
+     "A": 4.102941176470588,
+     "B": 3.1176470588235294,
+     "C": 2.3088235294117645,
+     "D": 2.4558823529411766
+    }
+   ],
+   [
+    30,
+    {
+     "A": 4.029411764705882,
+     "B": 3.176470588235294,
+     "C": 2.288235294117647,
+     "D": 2.5588235294117645
+    }
+   ],
+   [
+    35,
+    {
+     "A": 3.9558823529411766,
+     "B": 3.2352941176470593,
+     "C": 2.2676470588235293,
+     "D": 2.6617647058823533
+    }
+   ],
+   [
+    40,
+    {
+     "A": 3.8823529411764706,
+     "B": 3.2941176470588243,
+     "C": 2.2470588235294118,
+     "D": 2.7647058823529416
+    }
+   ],
+   [
+    45,
+    {
+     "A": 3.808823529411765,
+     "B": 3.3529411764705888,
+     "C": 2.226470588235294,
+     "D": 2.8676470588235303
+    }
+   ],
+   [
+    50,
+    {
+     "A": 3.7352941176470593,
+     "B": 3.4117647058823524,
+     "C": 2.2058823529411766,
+     "D": 2.9705882352941173
+    }
+   ],
+   [
+    55,
+    {
+     "A": 3.661764705882353,
+     "B": 3.4705882352941178,
+     "C": 2.185294117647059,
+     "D": 3.073529411764706
+    }
+   ],
+   [
+    60,
+    {
+     "A": 3.5882352941176467,
+     "B": 3.5294117647058822,
+     "C": 2.164705882352941,
+     "D": 3.176470588235294
+    }
+   ],
+   [
+    65,
+    {
+     "A": 3.5147058823529407,
+     "B": 3.5882352941176467,
+     "C": 2.144117647058824,
+     "D": 3.2794117647058827
+    }
+   ],
+   [
+    70,
+    {
+     "A": 3.4411764705882346,
+     "B": 3.6470588235294117,
+     "C": 2.1235294117647063,
+     "D": 3.3823529411764706
+    }
+   ],
+   [
+    75,
+    {
+     "A": 3.3676470588235294,
+     "B": 3.7058823529411766,
+     "C": 2.102941176470588,
+     "D": 3.4852941176470584
+    }
+   ],
+   [
+    80,
+    {
+     "A": 3.294117647058824,
+     "B": 3.764705882352942,
+     "C": 2.0823529411764703,
+     "D": 3.588235294117647
+    }
+   ]
+  ],
+  "sweep_cost": [
+   [
+    0,
+    {
+     "A": 4.11764705882353,
+     "B": 3.0000000000000004,
+     "C": 2.4117647058823533,
+     "D": 2.4705882352941178
+    }
+   ],
+   [
+    5,
+    {
+     "A": 4.161764705882353,
+     "B": 3.0000000000000004,
+     "C": 2.3911764705882357,
+     "D": 2.397058823529412
+    }
+   ],
+   [
+    10,
+    {
+     "A": 4.205882352941177,
+     "B": 3.0,
+     "C": 2.3705882352941177,
+     "D": 2.323529411764706
+    }
+   ],
+   [
+    15,
+    {
+     "A": 4.25,
+     "B": 2.9999999999999996,
+     "C": 2.35,
+     "D": 2.25
+    }
+   ],
+   [
+    20,
+    {
+     "A": 4.294117647058824,
+     "B": 3.0,
+     "C": 2.329411764705883,
+     "D": 2.1764705882352935
+    }
+   ],
+   [
+    25,
+    {
+     "A": 4.338235294117648,
+     "B": 3.0,
+     "C": 2.3088235294117645,
+     "D": 2.102941176470588
+    }
+   ],
+   [
+    30,
+    {
+     "A": 4.38235294117647,
+     "B": 3.0,
+     "C": 2.288235294117647,
+     "D": 2.0294117647058822
+    }
+   ],
+   [
+    35,
+    {
+     "A": 4.426470588235294,
+     "B": 3.0,
+     "C": 2.2676470588235293,
+     "D": 1.9558823529411766
+    }
+   ],
+   [
+    40,
+    {
+     "A": 4.470588235294118,
+     "B": 3.0000000000000004,
+     "C": 2.2470588235294118,
+     "D": 1.8823529411764703
+    }
+   ],
+   [
+    45,
+    {
+     "A": 4.514705882352941,
+     "B": 3.0000000000000004,
+     "C": 2.226470588235294,
+     "D": 1.8088235294117645
+    }
+   ],
+   [
+    50,
+    {
+     "A": 4.5588235294117645,
+     "B": 3.0,
+     "C": 2.2058823529411766,
+     "D": 1.7352941176470589
+    }
+   ],
+   [
+    55,
+    {
+     "A": 4.602941176470589,
+     "B": 3.0,
+     "C": 2.185294117647059,
+     "D": 1.661764705882353
+    }
+   ],
+   [
+    60,
+    {
+     "A": 4.647058823529412,
+     "B": 3.0,
+     "C": 2.1647058823529415,
+     "D": 1.5882352941176467
+    }
+   ],
+   [
+    65,
+    {
+     "A": 4.6911764705882355,
+     "B": 3.0,
+     "C": 2.144117647058824,
+     "D": 1.5147058823529411
+    }
+   ],
+   [
+    70,
+    {
+     "A": 4.735294117647059,
+     "B": 3.0,
+     "C": 2.1235294117647063,
+     "D": 1.4411764705882353
+    }
+   ],
+   [
+    75,
+    {
+     "A": 4.779411764705881,
+     "B": 3.0,
+     "C": 2.1029411764705874,
+     "D": 1.3676470588235292
+    }
+   ],
+   [
+    80,
+    {
+     "A": 4.823529411764706,
+     "B": 3.0000000000000004,
+     "C": 2.0823529411764703,
+     "D": 1.2941176470588236
+    }
+   ]
+  ],
+  "crossover_usefulness": 63,
+  "crossover_cost": null,
+  "ml_sweep": [
+   [
+    0,
+    {
+     "A": 4.25,
+     "B": 2.9999999999999996,
+     "C": 2.35,
+     "D": 2.25
+    }
+   ],
+   [
+    0.5,
+    {
+     "A": 4.25,
+     "B": 3.3,
+     "C": 2.35,
+     "D": 2.25
+    }
+   ],
+   [
+    1,
+    {
+     "A": 4.25,
+     "B": 3.6,
+     "C": 2.35,
+     "D": 2.25
+    }
+   ],
+   [
+    1.5,
+    {
+     "A": 4.25,
+     "B": 3.9,
+     "C": 2.35,
+     "D": 2.25
+    }
+   ],
+   [
+    2,
+    {
+     "A": 4.25,
+     "B": 4.2,
+     "C": 2.35,
+     "D": 2.25
+    }
+   ],
+   [
+    2.5,
+    {
+     "A": 4.25,
+     "B": 4.275,
+     "C": 2.35,
+     "D": 2.25
+    }
+   ],
+   [
+    3,
+    {
+     "A": 4.25,
+     "B": 4.3500000000000005,
+     "C": 2.35,
+     "D": 2.25
+    }
+   ]
+  ],
+  "mc": {
+   "A": 0.9862,
+   "B": 0.0124,
+   "C": 0.0,
+   "D": 0.0014
+  },
+  "mc_weights_only": {
+   "A": 0.9973,
+   "B": 0.0027,
+   "C": 0.0,
+   "D": 0.0
+  },
+  "revised_mc": {
+   "A": 0.9993,
+   "B": 0.0007,
+   "C": 0.0,
+   "D": 0.0
+  }
+ },
+ "cost": {
+  "assumptions": {
+   "students": 5000,
+   "papers_per_student_year": 10,
+   "answers_per_paper": 5,
+   "result_windows_per_year": 2,
+   "working_days_per_window": 10,
+   "vm_month_inr": 7000,
+   "node_month_inr": 5000,
+   "gpu_hour_inr": 150,
+   "gpu_hours_year": 300,
+   "ml_infer_vm_month_inr": 5000,
+   "storage_gb_month_inr": 2.0,
+   "backup_gb_month_inr": 1.2,
+   "monitoring_year_inr": 6000,
+   "misc_year_inr": 3000,
+   "fte_year_inr": 900000,
+   "label_cost_per_answer_inr": 40,
+   "labelled_answers_year": 3000,
+   "vm_kw": 0.12,
+   "node_kw": 0.08,
+   "gpu_kw": 0.25,
+   "grid_kg_per_kwh": 0.71,
+   "budget_compute_original_inr": 300000,
+   "budget_compute_revised_inr": 150000
+  },
+  "alts": {
+   "A": {
+    "infra": 119280.0,
+    "staff": 135000.0,
+    "capex": 600000,
+    "opex": 254280.0,
+    "tco5": 1871400.0,
+    "kwh": 1314.0,
+    "kg_co2e": 932.9399999999999,
+    "fits_original_budget": true,
+    "fits_revised_budget": true
+   },
+   "B": {
+    "infra": 224280.0,
+    "staff": 525000.0,
+    "capex": 1000000,
+    "opex": 749280.0,
+    "tco5": 4746400.0,
+    "kwh": 2440.2000000000003,
+    "kg_co2e": 1732.5420000000001,
+    "fits_original_budget": true,
+    "fits_revised_budget": false
+   },
+   "C": {
+    "infra": 299280.0,
+    "staff": 405000.0,
+    "capex": 1100000,
+    "opex": 704280.0,
+    "tco5": 4621400.0,
+    "kwh": 3416.4,
+    "kg_co2e": 2425.644,
+    "fits_original_budget": true,
+    "fits_revised_budget": false
+   },
+   "D": {
+    "infra": 404280.0,
+    "staff": 795000.0,
+    "capex": 1500000,
+    "opex": 1199280.0,
+    "tco5": 7496400.0,
+    "kwh": 4542.6,
+    "kg_co2e": 3225.246,
+    "fits_original_budget": false,
+    "fits_revised_budget": false
+   },
+   "A2": {
+    "infra": 112280.0,
+    "staff": 162000.0,
+    "capex": 650000,
+    "opex": 274280.0,
+    "tco5": 2021400.0,
+    "kwh": 1229.904,
+    "kg_co2e": 873.2318399999999,
+    "fits_original_budget": true,
+    "fits_revised_budget": true
+   }
+  },
+  "volumes": {
+   "scripts_year": 50000,
+   "answers_year": 250000,
+   "audit_events_year": 1500000,
+   "audit_gb_year": 0.45777825,
+   "chain_verify_minutes_year_est": 0.15384708333385788
+  }
+ },
+ "prediction_check": {
+  "C1": true,
+  "C2_negation_v2": true,
+  "C2_recall_v2": false,
+  "C2_share_v2": true,
+  "C2_negation_v3": true,
+  "C2_recall_v3": true,
+  "C2_share_v3": false,
+  "C3": true,
+  "C4": true,
+  "C5": true
+ }
+}

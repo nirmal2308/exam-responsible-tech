@@ -1,0 +1,15 @@
+digraph G { rankdir=LR; dpi=200; bgcolor="white"; fontname="DejaVu Sans"; nodesep=0.35; ranksep=0.7;
+node [fontname="DejaVu Sans", fontsize=10, shape=box, style="rounded,filled", fillcolor="#DEEAF6", color="#1F3864"];
+edge [fontname="DejaVu Sans", fontsize=8, color="#1F3864"];
+subgraph cluster_in { label="IN SCOPE - Examination and Credential Platform"; style="rounded,filled"; fillcolor="#F7FAFD"; color="#1F3864"; fontsize=11;
+  core [label="Answer-script intake\nRubric-based suggestion\nExaminer evaluation and moderation\nMark approval and publication\nRevaluation and correction\nCredential issue and verification\nAudit trail", fillcolor="#1F3864", fontcolor="white", fontsize=11, width=3.2]; }
+subgraph cluster_out { label="OUT OF SCOPE"; style="rounded,dashed"; color="#8C8C8C"; fontsize=10; fontcolor="#595959";
+  o1 [label="Question-paper setting", fillcolor="#F2F2F2", color="#8C8C8C", fontcolor="#595959"];
+  o2 [label="Proctoring / hall tickets", fillcolor="#F2F2F2", color="#8C8C8C", fontcolor="#595959"];
+  o3 [label="Handwriting OCR\n(answers assumed digitised)", fillcolor="#F2F2F2", color="#8C8C8C", fontcolor="#595959"];
+  o4 [label="Fee payment, transcripts\nlogistics, plagiarism checks", fillcolor="#F2F2F2", color="#8C8C8C", fontcolor="#595959"]; }
+st [label="Students"]; ex [label="Examiners"]; mo [label="Moderators"]; co [label="Controller of\nExaminations"]; ad [label="Administrators"]; dh [label="Department heads"]; ev [label="External verifiers /\npartner institutions", fillcolor="#FCE4D6"];
+st -> core [label="answers, challenges"]; core -> st [label="results, credential"];
+ex -> core [label="marks, reasons"]; mo -> core [label="moderation"]; co -> core [label="approve, publish"]; ad -> core [label="accounts"]; core -> dh [label="aggregate reports"]; ev -> core [label="verify credential"];
+core -> o3 [style=invis]; core -> o1 [style=invis]; core -> o2 [style=invis]; core -> o4 [style=invis];
+}

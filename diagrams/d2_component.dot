@@ -1,0 +1,22 @@
+digraph G { rankdir=TB; dpi=200; bgcolor="white"; compound=true; nodesep=0.3; ranksep=0.45; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=9, shape=box, style="rounded,filled", fillcolor="#DEEAF6", color="#1F3864"]; edge [fontname="DejaVu Sans", fontsize=7.5, color="#1F3864"];
+subgraph cluster_u { label="Zone 1: User devices (untrusted)"; style="rounded,dashed"; color="#C0392B"; fontcolor="#C0392B";
+  ui1 [label="Examiner /\nModerator UI"]; ui2 [label="Controller UI"]; ui3 [label="Student portal"]; ui4 [label="Verifier portal\n(read-only)", fillcolor="#FCE4D6"]; }
+subgraph cluster_a { label="Zone 2: University application tier (trusted, authenticated)"; style="rounded,filled"; fillcolor="#F7FAFD"; color="#1F3864";
+  gw [label="API gateway\nTLS, MFA, RBAC", fillcolor="#1F3864", fontcolor="white"];
+  ev [label="Rubric evaluation service\n(deterministic rules v3)\nsuggestion + evidence + flags"];
+  wf [label="Workflow service\nstatus machine, override reasons,\nseparation of duties"];
+  au [label="Audit service\nhash chain + anchor"];
+  cr [label="Credential service\nsigned records + revocation list"];
+  ob [label="Outbox / retry worker"]; }
+subgraph cluster_d { label="Zone 3: University data tier (restricted, encrypted at rest)"; style="rounded,filled"; fillcolor="#F2F2F2"; color="#1F3864";
+  ans [label="Answer store\n(SENSITIVE)", fillcolor="#F8CBAD"]; mk [label="Marks DB\nversioned records\n(SENSITIVE)", fillcolor="#F8CBAD"]; ad [label="Audit store\nchain + separate payload\n(SENSITIVE payload)", fillcolor="#F8CBAD"]; rb [label="Rubric store"]; kv [label="Key vault\nsigning key", fillcolor="#FFE699"]; }
+subgraph cluster_e { label="Zone 4: External (outside university control)"; style="rounded,dashed"; color="#BF8F00"; fontcolor="#BF8F00";
+  px [label="Partner verification service\n(optional, may be unavailable)", fillcolor="#FCE4D6"]; }
+ml [label="ML scoring pilot\nDEFERRED - gated (G1-G4)", style="rounded,dashed", fillcolor="white", color="#8C8C8C", fontcolor="#8C8C8C"];
+bc [label="Shared ledger\nEXCLUDED", style="rounded,dashed", fillcolor="white", color="#8C8C8C", fontcolor="#8C8C8C"];
+ui1 -> gw; ui2 -> gw; ui3 -> gw; ui4 -> cr [label="public key +\ncredential ID"];
+gw -> ev; gw -> wf; gw -> cr;
+ev -> ans [label="read"]; ev -> rb; wf -> mk; wf -> au; ev -> au; cr -> au; cr -> kv [label="sign"]; au -> ad; cr -> ob; ob -> px [label="async, idempotent", style=dashed];
+ev -> ml [style=dotted, color="#8C8C8C", arrowhead=none]; cr -> bc [style=dotted, color="#8C8C8C", arrowhead=none];
+}

@@ -1,0 +1,16 @@
+digraph G { rankdir=TB; dpi=200; bgcolor="white"; compound=true; nodesep=0.3; ranksep=0.45; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=9, shape=box, style="rounded,filled", fillcolor="#DEEAF6", color="#1F3864"]; edge [fontname="DejaVu Sans", fontsize=7.5, color="#1F3864"];
+subgraph cluster_u { label="Zone 1: User devices (untrusted)"; style="rounded,dashed"; color="#C0392B"; fontcolor="#C0392B";
+  ui [label="Examiner / Moderator /\nController / Student UI"]; vp [label="Verifier: offline check\nwith public key + cached\nrevocation list", fillcolor="#FCE4D6"]; }
+subgraph cluster_a { label="Zone 2: University application tier - ONE VM + short standby"; style="rounded,filled"; fillcolor="#F7FAFD"; color="#1F3864";
+  gw [label="API gateway\nTLS, MFA, RBAC", fillcolor="#1F3864", fontcolor="white"];
+  ev [label="Rubric service v3\nsuggestions OFF for categories\nunder calibration (policy switch)", fillcolor="#C6E0B4"];
+  wf [label="Workflow service\n+ double-marking for\nflagged categories", fillcolor="#C6E0B4"];
+  co [label="NEW: Correction and\nredaction service\n(dual approval)", fillcolor="#C6E0B4"];
+  au [label="Audit service\nsalted commitments\n+ external anchor", fillcolor="#C6E0B4"];
+  cr [label="Credential service\nsigned records +\nsigned revocation list", fillcolor="#C6E0B4"]; }
+subgraph cluster_d { label="Zone 3: Data tier (encrypted at rest)"; style="rounded,filled"; fillcolor="#F2F2F2"; color="#1F3864";
+  ans [label="Answer store", fillcolor="#F8CBAD"]; mk [label="Marks DB (versioned)", fillcolor="#F8CBAD"]; ad [label="Audit chain +\nerasable payload store", fillcolor="#F8CBAD"]; kv [label="Key vault", fillcolor="#FFE699"]; }
+rm [label="REMOVED: shared ledger,\npartner service, ML pilot", style="rounded,dashed", fillcolor="white", color="#8C8C8C", fontcolor="#8C8C8C"];
+ui -> gw; gw -> ev; gw -> wf; gw -> co; gw -> cr; ev -> ans; wf -> mk; co -> mk; co -> ad [label="redact payload"]; wf -> au; co -> au; ev -> au; cr -> au; au -> ad; cr -> kv; cr -> vp [label="public key,\nrevocation list", style=dashed]; cr -> rm [style=dotted, arrowhead=none, color="#8C8C8C"];
+}

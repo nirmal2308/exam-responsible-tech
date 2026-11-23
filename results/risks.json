@@ -1,0 +1,65 @@
+[
+ {
+  "id": "R1",
+  "name": "Automation bias / anchoring",
+  "L": 4,
+  "I": 4,
+  "score": 16
+ },
+ {
+  "id": "R2",
+  "name": "Vocabulary bias against unconventional writers",
+  "L": 4,
+  "I": 4,
+  "score": 16
+ },
+ {
+  "id": "R3",
+  "name": "Flag read as probability",
+  "L": 3,
+  "I": 4,
+  "score": 12
+ },
+ {
+  "id": "R4",
+  "name": "Leak of student answers and marks",
+  "L": 3,
+  "I": 5,
+  "score": 15
+ },
+ {
+  "id": "R5",
+  "name": "Inaccurate mark cannot be corrected",
+  "L": 3,
+  "I": 4,
+  "score": 12
+ },
+ {
+  "id": "R6",
+  "name": "Accountability gap for published results",
+  "L": 2,
+  "I": 5,
+  "score": 10
+ },
+ {
+  "id": "R7",
+  "name": "Inconsistent examiner reference data",
+  "L": 4,
+  "I": 3,
+  "score": 12
+ },
+ {
+  "id": "R8",
+  "name": "Valid chain mistaken for correct marks",
+  "L": 3,
+  "I": 3,
+  "score": 9
+ },
+ {
+  "id": "R9",
+  "name": "Budget cuts erode monitoring/backups",
+  "L": 3,
+  "I": 3,
+  "score": 9
+ }
+]

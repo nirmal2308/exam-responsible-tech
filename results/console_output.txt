@@ -1,0 +1,71 @@
+==============================================================================
+EXAMINATION PLATFORM - RESPONSIBLE TECHNOLOGY DEMONSTRATOR
+==============================================================================
+Synthetic answers: 240 (seed 20261123); variants: {'absent': 298, 'negated': 122, 'exact': 371, 'paraphrase': 240, 'unfamiliar': 169}
+
+[1] Script-level agreement with expert mark (all scripts)
+engine     exact  within +/-1     MAE    bias  pass/fail  |diff|>=2
+v0         15.8%        56.7%    1.46   -1.20      69.6%      43.3%
+v1         36.2%        84.2%    0.80   -0.20      89.6%      15.8%
+v2         45.4%        84.2%    0.72   -0.72      85.8%      15.8%
+v3         45.4%        85.4%    0.70   -0.70      85.8%      14.6%
+
+[2] Point-level credit rate by answer type (share of rubric points credited)
+type          expert      v0      v1      v2      v3
+exact         credit  100.0%  100.0%   99.2%  100.0%
+paraphrase    credit    0.0%  100.0%  100.0%  100.0%
+unfamiliar    credit    0.0%    0.0%    0.0%    0.0%
+negated         none  100.0%  100.0%    0.0%    0.0%
+absent          none    0.0%    0.0%    0.0%    0.0%
+
+[3] Stakes-discrepancy matrix
+  v1:
+    exact                               87  (no flags in v1: silent)
+    under-marked, same outcome          76  (no flags in v1: silent)
+    under-marked, pass/fail flips       17  (no flags in v1: silent)
+    over-marked, same outcome           52  (no flags in v1: silent)
+    over-marked, pass/fail flips         8  (no flags in v1: silent)
+  v2:
+    exact                              109  HIGH-flagged 57, any flag 64
+    under-marked, same outcome          97  HIGH-flagged 54, any flag 68
+    under-marked, pass/fail flips       34  HIGH-flagged 30, any flag 34
+    over-marked, same outcome            0  HIGH-flagged 0, any flag 0
+    over-marked, pass/fail flips         0  HIGH-flagged 0, any flag 0
+  v3:
+    exact                              109  HIGH-flagged 58, any flag 65
+    under-marked, same outcome          97  HIGH-flagged 68, any flag 76
+    under-marked, pass/fail flips       34  HIGH-flagged 32, any flag 34
+    over-marked, same outcome            0  HIGH-flagged 0, any flag 0
+    over-marked, pass/fail flips         0  HIGH-flagged 0, any flag 0
+
+[4] Moderation priority
+  v2: HIGH share 58.8%, HIGH+MEDIUM 69.2%; recall of |diff|>=2 76.3% (n=38); recall of pass/fail flips 88.2% (n=34); NEGATION flags on scripts with no negated content: 1
+  v3: HIGH share 65.8%, HIGH+MEDIUM 72.9%; recall of |diff|>=2 100.0% (n=35); recall of pass/fail flips 94.1% (n=34); NEGATION flags on scripts with no negated content: 0
+
+[5] Tamper matrix
+  T1 edit a logged mark             plain: UNDETECTED | trig: PREVENTED (ordinary SQL) / UNDETECTED after privileged bypass | chain: DETECTED | chain+anchor: DETECTED
+  T2 delete a middle log row        plain: UNDETECTED | trig: PREVENTED (ordinary SQL) / UNDETECTED after privileged bypass | chain: DETECTED | chain+anchor: DETECTED
+  T3 swap two log rows              plain: UNDETECTED | trig: PREVENTED (ordinary SQL) / UNDETECTED after privileged bypass | chain: DETECTED | chain+anchor: DETECTED
+  T4 truncate the last 8 log rows   plain: UNDETECTED | trig: PREVENTED (ordinary SQL) / UNDETECTED after privileged bypass | chain: UNDETECTED | chain+anchor: DETECTED
+
+[6] Validation scenarios
+  PASS V1  Mark validation (range, type, 0.5 steps)
+  PASS V2  Status workflow cannot be skipped
+  PASS V3  Grade-band mapping (0-5 of 5)
+  PASS V4  Authorization matrix (role x action)
+  PASS V5  Separation of duties and ownership
+  PASS V6  Override needs a reason and is audited
+  PASS V7  Persistence across restart
+  PASS V8  Audit completeness incl. denied attempts
+  PASS V9  Audit tampering: plain table vs append-only table vs hash chain
+  PASS V10 Chain cannot verify input truthfulness
+  PASS V11 Redaction of sensitive payload keeps audit chain valid
+  PASS V12 Revaluation: independent re-evaluation, versioned correction
+  PASS V13 Verification service outage: local records preserved, safe retry
+  PASS V14 Signed credential: offline verify, tamper, revoke and re-issue
+
+[7] Measured: rules 0.261 ms/answer; audit append 0.022 ms/entry; chain verify 0.04 s for 6000 entries; 305 B/entry
+
+[8] Predictions vs observation: {'C1': True, 'C2_negation_v2': True, 'C2_recall_v2': False, 'C2_share_v2': True, 'C2_negation_v3': True, 'C2_recall_v3': True, 'C2_share_v3': False, 'C3': True, 'C4': True, 'C5': True}
+
+Results written to results/results.json and results/synthetic_dataset.csv

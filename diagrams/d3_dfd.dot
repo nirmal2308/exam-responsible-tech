@@ -1,0 +1,18 @@
+digraph G { rankdir=LR; dpi=200; bgcolor="white"; nodesep=0.3; ranksep=0.55; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=9]; edge [fontname="DejaVu Sans", fontsize=7.5, color="#1F3864"];
+node [shape=box, style="filled", fillcolor="#E7E6E6", color="#595959"];
+S [label="Student"]; E [label="Examiner"]; M [label="Moderator"]; C [label="Controller"]; V [label="External\nverifier"];
+subgraph cluster_tb { label="TRUST BOUNDARY: university systems"; style="rounded,dashed"; color="#C0392B"; fontcolor="#C0392B";
+ node [shape=ellipse, style="filled", fillcolor="#DEEAF6", color="#1F3864"];
+ P1 [label="P1\nReceive and\nstore answers"]; P2 [label="P2\nRubric\nsuggestion"]; P3 [label="P3\nExaminer\nevaluation"]; P4 [label="P4\nModeration"]; P5 [label="P5\nApprove and\npublish"]; P6 [label="P6\nRevaluation and\ncorrection"]; P7 [label="P7\nIssue and\nverify credential"];
+ node [shape=box, style="filled", fillcolor="#F8CBAD", color="#C0392B"];
+ D1 [label="D1 Answer store\n(sensitive)"]; D2 [label="D2 Marks DB\n(sensitive)"]; D3 [label="D3 Audit chain"]; 
+ node [fillcolor="#F2F2F2", color="#595959"]; D4 [label="D4 Rubric store"]; D5 [label="D5 Credential\nregistry"]; }
+S -> P1 [label="answer script", color="#C0392B", fontcolor="#C0392B"]; P1 -> D1 [color="#C0392B"];
+D1 -> P2 [label="answer text", color="#C0392B", fontcolor="#C0392B"]; D4 -> P2 [label="rubric"]; P2 -> P3 [label="suggestion +\nevidence + flags"];
+E -> P3 [label="mark, reason", color="#C0392B", fontcolor="#C0392B"]; P3 -> D2 [color="#C0392B"]; P3 -> D3 [label="event"];
+D2 -> P4 [color="#C0392B"]; M -> P4 [label="moderated mark"]; P4 -> D2 [color="#C0392B"]; P4 -> D3;
+C -> P5 [label="approval"]; D2 -> P5 [color="#C0392B"]; P5 -> S [label="result", color="#C0392B", fontcolor="#C0392B"]; P5 -> D3;
+S -> P6 [label="challenge"]; P6 -> D2 [color="#C0392B"]; P6 -> D3 [label="correction /\nredaction event"]; D2 -> P7 [label="degree award data", color="#C0392B", fontcolor="#C0392B"]; P7 -> D5; P7 -> D3;
+V -> P7 [label="credential ID"]; P7 -> V [label="signed record:\nvalid / revoked"];
+}

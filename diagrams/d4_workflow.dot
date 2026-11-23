@@ -1,0 +1,14 @@
+digraph G { rankdir=TB; dpi=200; bgcolor="white"; nodesep=0.3; ranksep=0.35; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=9, shape=box, style="rounded,filled", color="#1F3864"]; edge [fontname="DejaVu Sans", fontsize=8, color="#1F3864"];
+sys [label="System: rules produce suggestion\n+ evidence + flags (v3)", fillcolor="#E7E6E6"];
+dec [label="Priority HIGH?", shape=diamond, fillcolor="#FFF2CC"];
+hide [label="Suggestion withheld:\nrules not reliable here", fillcolor="#E7E6E6"]; show [label="Suggestion shown as\naid with evidence", fillcolor="#E7E6E6"];
+ex [label="Examiner reads the answer and\nrecords the mark", fillcolor="#DEEAF6"];
+ov [label="Mark differs from suggestion?", shape=diamond, fillcolor="#FFF2CC"]; rs [label="Reason mandatory;\noverride logged", fillcolor="#DEEAF6"];
+mod [label="Moderator: HIGH-priority and sampled scripts;\nchange only with reason", fillcolor="#E2EFDA"];
+ctl [label="Controller approves (different person)", fillcolor="#FCE4D6"]; pub [label="Result published", fillcolor="#FCE4D6"];
+ch [label="Student challenges\n(own record only)", fillcolor="#F8CBAD"]; rev [label="Independent re-evaluation\n(not the original examiner)", fillcolor="#E2EFDA"];
+ok [label="Mark changed?", shape=diamond, fillcolor="#FFF2CC"]; vers [label="New version approved and published;\noriginal version retained", fillcolor="#FCE4D6"];
+esc [label="Result Review Committee\n(final appeal)", fillcolor="#F8CBAD"]; red [label="Sensitive / wrong source data?\nControl-approved redaction;\nchain stays valid", fillcolor="#F8CBAD"];
+sys -> dec; dec -> hide [label="yes"]; dec -> show [label="no"]; hide -> ex; show -> ex; ex -> ov; ov -> rs [label="yes"]; ov -> mod [label="no"]; rs -> mod; mod -> ctl; ctl -> pub; pub -> ch; ch -> rev; rev -> ok; ok -> vers [label="yes"]; ok -> esc [label="no, student disputes"]; esc -> vers; ch -> red [style=dashed, label="data error"]; red -> vers [style=dashed];
+}
